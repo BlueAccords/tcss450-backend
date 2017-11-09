@@ -232,7 +232,6 @@ module.exports = {
             // updating expiration time to 10 mins in the future
             if(user.isConfirmationCodeExpired()) {
               user.updateConfirmationCode().then((result) => {
-                // TODO: SEnd email with new code here
                 sendJSONError(httpCodes.ClientError.badRequest,
                   "Bad Request",
                   [{message: "Confirmation code is expired. New reset confirmation code sent to email"}],

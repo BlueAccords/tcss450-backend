@@ -2,8 +2,6 @@
 # Created by https://www.gitignore.io/api/node,osx,mysql
 
 # secret/pws
-server/config/secret.js
-server/config/config.json
 
 ### Node ###
 # Logs
