@@ -85,6 +85,11 @@ module.exports = {
               res);
           }
 
+          delete user.dataValues.confirmationCode;
+          delete user._previousDataValues.confirmationCode;
+          delete user.dataValues.password;
+          delete user._previousDataValues.password;
+
           //res.status(httpCodes.Success.created).send(user);
           sendJSONSuccess(httpCodes.Success.created,
           "Successfully created user",
@@ -142,6 +147,9 @@ module.exports = {
           if (isValid) {
             delete user.dataValues.password;
             delete user._previousDataValues.password;
+            delete user.dataValues.confirmationCode;
+            delete user._previousDataValues.confirmationCode;
+
             sendJSONSuccess(httpCodes.Success.OK,
               "Sucessful Login",
               user,
