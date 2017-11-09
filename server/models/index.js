@@ -42,7 +42,6 @@ Object.keys(db).forEach(modelName => {
  * NOTE: This will cause the database to recreate tables every time the server is restarted.
  * This should be removed during production and changes to the database schema will need to be done via migrations
  */
-sequelize.sync({force: true});
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
