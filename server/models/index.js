@@ -15,7 +15,8 @@ if (env == "production") {
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
-    dialect: config.dialect
+    dialect: config.dialect,
+    port: config.port
   });
 }
 
