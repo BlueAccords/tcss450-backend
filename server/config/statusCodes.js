@@ -9,7 +9,7 @@ module.exports = {
   },
   ClientError: {
     badRequest: 400,
-    unauthorized: 401,
+    unauthorized: 400,
     forbidden: 403,
     notFound: 404,
     imATeapot: 418,
