@@ -12,6 +12,7 @@ var db        = {};
 
 let sequelize;
 if (env != "production") {
+  console.log("Starting db in dev mode...");
   sequelize = new Sequelize(
     devConfig.database,
     devConfig.username,
@@ -22,6 +23,7 @@ if (env != "production") {
     }
   );
 } else {
+  console.log("Starting db in production mode...");
   sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: config.dialect,
@@ -51,6 +53,10 @@ Object.keys(db).forEach(modelName => {
  * NOTE: This will cause the database to recreate tables every time the server is restarted.
  * This should be removed during production and changes to the database schema will need to be done via migrations
  */
+if (env != "production") {
+  console.log("resetting dev database");
+  sequelize.sync({force: true});		
+}
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

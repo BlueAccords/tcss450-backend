@@ -87,7 +87,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        User.hasMany(models.Favorite, {
+          foreignKey: 'userId',
+          as: 'favorites',
+        });
       }
     }
   });
