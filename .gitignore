@@ -4,7 +4,8 @@
 # secret/pws
 # removed for production
 server/config/config.json
-git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch server/config/secret.js' --prune-empty --tag-name-filter cat -- --all
+server/config/secret.js
+
 ### Node ###
 # Logs
 logs
