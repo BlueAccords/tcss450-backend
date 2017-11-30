@@ -10,4 +10,5 @@ module.exports = function(app) {
   app.post('/api/users/login', usersController.login);
   app.post('/api/users/confirm', usersController.confirmAccount);
   app.post('/api/favorites', favoritesController.addFavorite);
+  app.post('/api/favorites/remove', favoritesController.removeFavorite);
 }
