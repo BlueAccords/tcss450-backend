@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: 'compositeUserIndex',
+      unique: 'composite_user_favorite_index',
       validate: {
         len: {
           args: [1,500],
@@ -16,15 +16,29 @@ module.exports = (sequelize, DataTypes) => {
     year: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      unique: 'composite_user_favorite_index',
       validate: {
-        isInteger: {
-          msg: "Year must be an integer"
-        },
-        notNull: {
-          msg: "Year value must be present"
+        min: {
+          args: 1,
+          msg: "Year must be at least 1"
         }
-      },
+      }
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: 'composite_user_favorite_index',
+      validate: {
+        min: {
+          args: 1,
+          msg: "User id must at least be 1 or greater"
+        },
+        is: { 
+          args: /^[0-9]+$/i,
+          msg: "User id must be numeric"
+        }, 
+      }
+    }
   }, {
     hooks: {
       // hooks like before/after create go here
@@ -34,7 +48,6 @@ module.exports = (sequelize, DataTypes) => {
         Favorite.belongsTo(models.User, {
           foreignKey: 'userId',
           onDelete: 'CASCADE',
-          unique: 'compositeUserIndex'
         });
       }
     }

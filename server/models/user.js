@@ -95,6 +95,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
+
   // instance methods
   User.prototype.isPasswordEqualTo = function(password) {
     return bcrypt.compareSync(password, this.password)
