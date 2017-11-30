@@ -44,6 +44,7 @@ module.exports = {
         
       });
   },
+  // # POST to /favorites/remove
   removeFavorite(req, res) {
     return Favorite.findOne({
       where: {
@@ -115,6 +116,48 @@ module.exports = {
         res
       );
     })
+  },
+  // # GET to /favorites/:userId/
+  getUserFavorites(req, res) {
+    let userId = req.params.userId;
+
+    return Favorite.findAndCountAll({
+      where: {
+        userId: userId
+      }
+    }).then(result => {
+      let foundFavorites = result.rows;
+      let count = result.count;
+
+      // send successful result of found favorites and count
+      if(count == 0) {
+        sendJSONSuccess(
+          httpCodes.Success.OK,
+          "No Favorites Found",
+          { count: count,
+            favorites: foundFavorites
+          },
+          res
+        );
+      } else {
+        sendJSONSuccess(
+          httpCodes.Success.OK,
+          "Success",
+          { count: count,
+            favorites: foundFavorites
+          },
+          res
+        );
+      }
+    }).catch(error => {
+      // server/sql error
+      sendJSONError(
+        httpCodes.ServerError.internalServerError,
+        error.name,
+        error.errors,
+        res
+      );
+    });
   }
 };
 
