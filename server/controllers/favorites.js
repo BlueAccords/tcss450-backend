@@ -12,11 +12,15 @@ const httpCodes = rootRequire('server/config/statusCodes');
 module.exports = {
   // # POST to /favorites
   addFavorite(req, res) {
+    // TODO: validate user with userid exists before adding to favorites
     return Favorite
       .create({
         userId: req.body.userId,
         title: req.body.title,
-        year: req.body.year,
+        release_date: req.body.release_date,
+        poster_path: req.body.poster_path,
+        backdrop_path: req.body.backdrop_path,
+        overview: req.body.overview
       })
       .then(favorite => {
           sendJSONSuccess(httpCodes.Success.created,

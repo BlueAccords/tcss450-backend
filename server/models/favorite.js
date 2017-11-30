@@ -1,5 +1,13 @@
 'use strict';
 
+/**
+  String movieTitle = jsonPart.getString("title");
+  String moviePoster = jsonPart.getString("poster_path");
+  String movieOverview = jsonPart.getString("overview");
+  String movieYear = jsonPart.getString("release_date");
+  String backdrop = jsonPart.getString("backdrop_path"); 
+ */
+
 module.exports = (sequelize, DataTypes) => {
   var Favorite = sequelize.define('Favorite', {
     title: {
@@ -13,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
     },
-    year: {
+    release_date: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: 'composite_user_favorite_index',
@@ -23,6 +31,18 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Year must be at least 1"
         }
       }
+    },
+    poster_path: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    backdrop_path: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    overview: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     userId: {
       type: DataTypes.INTEGER,
