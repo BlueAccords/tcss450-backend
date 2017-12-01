@@ -6,9 +6,6 @@ const Favorite = rootRequire('server/models').Favorite;
 // status code constants
 const httpCodes = rootRequire('server/config/statusCodes');
 
-
-
-
 module.exports = {
   // # POST to /favorites
   addFavorite(req, res) {
@@ -43,9 +40,7 @@ module.exports = {
             error.errors,
             res
           );
-
         }
-        
       });
   },
   // # POST to /favorites/remove
@@ -58,8 +53,6 @@ module.exports = {
     }).then(foundFavorite => {
 
       // if favorite/user combo is NOT found then return error.
-      console.log("FOUND FAVORITES");
-      console.log(foundFavorite);
       if(foundFavorite === null) {
         sendJSONError(
           httpCodes.ClientError.badRequest,
@@ -162,7 +155,46 @@ module.exports = {
         res
       );
     });
-  }
+  },
+  getOneFavorite(req, res) {
+    let userId = req.params.userId;
+    let title = req.params.title;
+    let release_date = req.params.releaseDate;
+
+    return Favorite.findOne({
+      where: {
+        title: title,
+        userId: userId,
+        release_date: release_date
+      }
+    }).then(foundFavorite => {
+      // check if favorite is NOT found
+      if(foundFavorite === null) {
+        sendJSONError(
+          httpCodes.ClientError.badRequest,
+          "Failed to find favorite",
+          [{ message: "Could not find favorite with that title, year, and user id combination"}],
+          res
+        );
+        req.connection.destroy();
+        return;
+      }
+
+      // else if favorite is found
+      sendJSONSuccess(httpCodes.Success.OK,
+        "Success",
+        foundFavorite,
+        res)
+    }).catch(error => {
+      // server/sql error
+      sendJSONError(
+        httpCodes.ServerError.internalServerError,
+        error.name,
+        error.errors,
+        res
+      );
+    })
+}
 };
 
 // Helper Method to construct return values
