@@ -6,12 +6,13 @@ var Sequelize = require('sequelize');
 var basename  = path.basename(__filename);
 var env       = process.env.NODE_ENV || 'development';
 //var config    = require(__dirname + '/../config/config.json')[env];
-var config    = require(__dirname + '/../config/config.json')["production"];
-var devConfig    = require(__dirname + '/../config/config.json')["development"];
 var db        = {};
 
 let sequelize;
 if (env != "PRODUCTION") {
+  var config    = require(__dirname + '/../config/config.json')["production"];
+  var devConfig    = require(__dirname + '/../config/config.json')["development"];
+
   console.log("Starting db in dev mode...");
 
   sequelize = new Sequelize(
@@ -26,13 +27,13 @@ if (env != "PRODUCTION") {
 } else {
   console.log("Starting db in production mode...");
     sequelize = new Sequelize(
-      process.env.DB_PROD_DATABASE || config.database,
-      process.env.DB_PROD_USERNAME || config.username,
-      process.env.DB_PROD_PASSWORD || config.password,
+      process.env.DB_PROD_DATABASE,
+      process.env.DB_PROD_USERNAME,
+      process.env.DB_PROD_PASSWORD,
       {
-        host: process.env.DB_PROD_HOST || config.host,
-        dialect: process.env.DB_PROD_DIALECT || config.dialect,
-        port: process.env.DB_PROD_PORT || config.port
+        host: process.env.DB_PROD_HOST,
+        dialect: process.env.DB_PROD_DIALECT,
+        port: process.env.DB_PROD_PORT,
       }
     );
 }
