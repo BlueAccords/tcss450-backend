@@ -1,7 +1,7 @@
 'use strict';
 
 const User = rootRequire('server/models').User;
-const credentials = rootRequire('server/config/secret');
+// const credentials = rootRequire('server/config/secret');
 const nodemailer = require('nodemailer');
 
 // email html template(s)
@@ -24,8 +24,8 @@ let transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: credentials.emailUsername,
-    pass: credentials.emailPassword
+    user: process.env.EMAIL_PROD_USERNAME,
+    pass: process.env.EMAIL_PROD_PASSWORD,
   }
 });
 
