@@ -61,6 +61,8 @@ if (env != "PRODUCTION") {
   }, function(err){
       console.log(err);
   });
+} else {
+  console.log("===== DATABASE NOT RESET -- IN PRODUCTION MODE");
 }
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
