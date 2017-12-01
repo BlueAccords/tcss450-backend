@@ -10,20 +10,7 @@ var db        = {};
 
 let sequelize;
 if (env != "PRODUCTION") {
-  var config    = require(__dirname + '/../config/config.json')["production"];
-  var devConfig    = require(__dirname + '/../config/config.json')["development"];
 
-  console.log("Starting db in dev mode...");
-
-  sequelize = new Sequelize(
-    devConfig.database,
-    devConfig.username,
-    devConfig.password,
-    {
-      host: devConfig.host,
-      dialect: devConfig.dialect
-    }
-  );
 } else {
   console.log("Starting db in production mode...");
     sequelize = new Sequelize(
