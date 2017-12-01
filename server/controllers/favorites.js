@@ -156,6 +156,7 @@ module.exports = {
       );
     });
   },
+  // #GET to /favorites/single/:userId/:title/:releaseDate
   getOneFavorite(req, res) {
     let userId = req.params.userId;
     let title = req.params.title;
