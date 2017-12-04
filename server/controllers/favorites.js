@@ -132,7 +132,7 @@ module.exports = {
           httpCodes.Success.OK,
           "No Favorites Found",
           { count: count,
-            favorites: foundFavorites
+            results: foundFavorites
           },
           res
         );
@@ -141,7 +141,7 @@ module.exports = {
           httpCodes.Success.OK,
           "Success",
           { count: count,
-            favorites: foundFavorites
+            results: foundFavorites
           },
           res
         );
@@ -213,6 +213,11 @@ function sendJSONSuccess(code, message, value, res) {
     message: message,
     value: value
   }
+
+  res.status(code).send(returnObj);
+}
+
+function sendJSONFavoritesResults(code, returnObj, value, res) {
 
   res.status(code).send(returnObj);
 }
