@@ -128,19 +128,19 @@ module.exports = {
 
       // send successful result of found favorites and count
       if(count == 0) {
-        sendJSONSuccess(
+        sendJSONFavoritesResults(
           httpCodes.Success.OK,
-          "No Favorites Found",
           { count: count,
+            message: "No Favorites Found",
             results: foundFavorites
           },
           res
         );
       } else {
-        sendJSONSuccess(
+        sendJSONFavoritesResults(
           httpCodes.Success.OK,
-          "Success",
           { count: count,
+            message: "Success",
             results: foundFavorites
           },
           res
@@ -217,7 +217,7 @@ function sendJSONSuccess(code, message, value, res) {
   res.status(code).send(returnObj);
 }
 
-function sendJSONFavoritesResults(code, returnObj, value, res) {
+function sendJSONFavoritesResults(code, returnObj, res) {
 
   res.status(code).send(returnObj);
 }
